@@ -1,0 +1,88 @@
+<html>
+  <head>
+    <title>Movies Database</title>
+
+    <link href= "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src= "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+      </script>
+
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg text-secondary">
+        <div class="container">
+        <a class="navbar-brand" href="index.html">Movies Databse</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="Movies.html">Movies</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="report.html">Report</a>
+          </li>
+        </ul> 
+       </div>
+        </div>
+      </nav>
+      <div class="container">
+        <h2>Movie Details</h2>
+      </div>
+    </header>
+  <main class="container mt-4">
+    <section id="MoviesDetails">
+      <!-- player details will be displayed here -->
+    </section>
+  </main>
+
+  <script>
+    // database
+    let movies = [
+      { id: "1", name: "Movie 1", Genre: "Action", Details: "This is an action-packed movie" },
+      { id: "2", name: "Movie 2", Genre: "Drama", Details: "A dramatic story unfolds in this movie"},
+      { id: "3", name: "Movie 3", Genre: "Comedy", Details: "A Comedy movie to make you laugh" }
+    ];
+
+    function getParameterById(id) {
+      let url = new URL(window.location.href);
+      return url.searchParams.get(id);
+    }
+
+    let movieId = getParameterById('id');
+
+    // find the id in database
+    let player;
+    for (let i = 0; i < movies.length; i++) {
+      if (movies[i].id === movieId) {
+          movie = movies[i];
+      }
+    }
+
+    // display the details on the view
+    let moviesDetailsElement = document.getElementById('MoviesDetails');
+    if (movie) {
+        moviesDetailsElement.innerHTML = `
+      <div class="row">
+        <div class="col-md-7">
+        <div class="card">
+        <div class="card-body">
+        <h3>${movie.name}</h3>
+            <p><span class="fw-bold">Country:</span> ${movie.Genre}</p>
+            <p><span class="fw-bold">Details:</span> ${movie.Details}</p>
+
+          </div>
+        </div>
+      `;
+    } else {
+        moviesDetailsElement.innerHTML = 'Movie not found';
+    }
+  </script>
+</body>
+
+</html>
